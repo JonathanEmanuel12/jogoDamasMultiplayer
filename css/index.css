@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    background-color: cadetblue;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+}
+
+#gridPrincipal {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    
+    width: 600px;
+    height: 600px;
+}
+
+.grid_parte {
+    background-color: rgb(109, 42, 42);
+}
