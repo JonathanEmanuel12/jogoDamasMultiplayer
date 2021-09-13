@@ -6,7 +6,7 @@
 
 
 body {
-    background-color: cadetblue;
+    background-color: grey;
     display: flex;
     padding: 10px;
     justify-content: center;
@@ -14,13 +14,17 @@ body {
 
 #gridPrincipal {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    
-    width: 600px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    width: 750px;
     height: 600px;
+    border-radius: 5px;
+    border-style: groove;
+    border-width: 15px;
+    border-color: burlywood;
 }
 
 .grid_parte {
     background-color: rgb(109, 42, 42);
+    color: blue;
 }
