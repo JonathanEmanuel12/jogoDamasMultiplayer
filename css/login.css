@@ -9,24 +9,31 @@ body {
     display: flex;
     justify-content: center;
     background-color: #d9f2ff;
-
 }
 
-.login {
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+#login {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: fixed;
-    bottom: 50%;
+    margin-top: 60px;
     padding: 12px;
-    width: 30%;
+    width: 300px;
+    height: 220px;
     background: rgba(113, 159, 245, 0.3);
     box-shadow: 1px 1px 8px rgb(18, 10, 143);
 
 }
 
 #titulo {
-    margin-top: 20px;
+    margin-top: 5%;
     align-self: center;
     margin-bottom: 10px;
     color: #120a8f;
@@ -85,15 +92,53 @@ body {
     border-color: rgb(0, 0, 255); 
     border-width: 2px;
     background-color: rgba(0, 0, 255, 0.1);
-    width: 80px;
+    width: 95px;
     border-width: 2px;
     border-color: #120a8f;
     align-self: center;
     color: #120a8f;
+    text-align: center;
 
 }
 
 .btn:hover {
     background-color: #120a8f;
-    color: #5facff   
+    color: #5facff;  
+}
+
+.btn:active {
+    background-color: #120a8f;
+    color: #5facff;
+
+}
+
+#textCadastro {
+    font-size: small;
+    align-self: center;
+    margin-top: 8px;
+    color: #120a8f;
+    cursor:default;
+    
+}
+
+#textCadastro:hover {
+    border-bottom: #120a8f;
+    border-style: solid;
+    border-width: 1px;
+    border-top: none;
+    border-left: none;
+    border-right: none; 
+}
+
+#textCadastro:active {
+    color: #5facff;
+}
+
+#textValidacao {
+    font-size: 9px ;
+    align-self: center;
+    margin-bottom: 5px;
+    color: #120a8f;
+    
+
 }
