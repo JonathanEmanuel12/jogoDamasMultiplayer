@@ -2,14 +2,17 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: "Oxygen", sans-serif;
+    color: #00054b;
 }
 
 
 body {
-    background-color: grey;
+    background-color: #5facff;
     display: flex;
-    padding: 10px;
-    justify-content: center;
+    padding: 15px;
+    justify-content: space-between;
+    flex-direction: row;
 }
 
 #gridPrincipal {
@@ -32,12 +35,13 @@ body {
     align-items: center;
 }
 
-button {
+.btn_tabuleiro {
     border-radius: 50%;
     width: 45px;
     height: 45px;
     border-width: 4px;
     border-color: chocolate;
+    cursor: pointer;
 }
 .peca_branca{
     background-color: #fff;
@@ -45,4 +49,80 @@ button {
 
 .peca_preta {
     background-color: #000;
+}
+
+.cont_geral {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 180px;
+    box-shadow: 1px 1px 5px #000878;
+    border-color: #000878;
+    border-width: 1px;
+    border-style: solid;
+}
+
+#containerUsuario {
+    text-align: center;
+    height: 180px;
+
+}
+
+li {
+    list-style-type: none;
+    margin-top: 16px;
+}
+
+.jogador {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    
+    margin: 5px;
+    padding: 5px;
+    border-width: 0px;
+    border-style: solid;
+    border-color: #000878;
+    border-top: none;
+    border-left: none;
+    border-right:none;
+    box-shadow: 2px 2px 1px #000878;
+    
+
+}
+
+.btn_jogador {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: none;
+
+}
+
+.estado {
+    font-size: small;
+}
+
+#containerComLogin {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#sair {
+    background-color: #5facff;
+    font-weight: bold;
+    margin-left: 8px;
+    margin-bottom: 8px;
+    font-size: 20px;
+    border: none;
+    cursor: default;
+}
+
+#sair:hover {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #00054b;
+    border-top: none;
+    border-left: none;
+    border-right: none; 
 }

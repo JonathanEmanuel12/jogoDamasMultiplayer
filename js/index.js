@@ -18,6 +18,8 @@ var jogadaIniciada = false;
 criarTabuleiro();
 tingirTabuleiro();
 criarPecas();
+pegarEstatisticas();
+pegarUsuarios();
 
 
 function criarTabuleiro()
@@ -47,6 +49,7 @@ function tingirTabuleiro()
                 div.style.backgroundColor = "#000";
             } else {
                 div.style.backgroundColor = "#fff";
+                div.style.cursor = "pointer";
                 div.addEventListener("click", function(event) {
                     if(!(event.target.id == ""))
                     {
@@ -75,6 +78,11 @@ function criarPecas()
         pecaBtn2.classList.add("peca_branca");    
         pecaBtn3.classList.add("peca_preta");
         pecaBtn4.classList.add("peca_preta");
+
+        pecaBtn.classList.add("btn_tabuleiro");
+        pecaBtn2.classList.add("btn_tabuleiro");
+        pecaBtn3.classList.add("btn_tabuleiro");
+        pecaBtn4.classList.add("btn_tabuleiro");
 
         pecaBtn.addEventListener("click", function(event) {
             guardarPosicao(event.target);
@@ -143,8 +151,6 @@ function movPeca(divDestino)
         divOrigem.innerHTML = "";
     }
 
-//terminar else ifs
-
     else if((pecaEscolhida.linha == (destino.linha + 2)) & (pecaEscolhida.coluna == (destino.coluna - 2)))
     {
         if(document.getElementById((destino.linha + 1).toString() + (destino.coluna - 1).toString()).children[0] != undefined)
@@ -184,4 +190,74 @@ function movPeca(divDestino)
     }
 
     jogadaIniciada = false;
+}
+
+function pegarEstatisticas() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'condutor.php?rota=calcularEstatisticas&idUsuario=' + document.getElementById("idUsuario").value);
+
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState == 4) {
+            if(xhr.status == 200) {
+                passarEstatisticasCampos(JSON.parse(xhr.responseText));
+            }
+        }
+    }
+
+    xhr.send();
+}
+
+function passarEstatisticasCampos(resultados) {
+    document.getElementById("vitorias").innerHTML = "Vitórias:" + resultados.vitorias ;
+    document.getElementById("derrotas").innerHTML = "Derrotas:" + resultados.derrotas;    
+    document.getElementById("empates").innerHTML = "Empates:" + resultados.empates;  
+}
+
+function pegarUsuarios() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'condutor.php?rota=buscarUsuarios&idUsuario=' + document.getElementById("idUsuario").value);
+    console.log("Eita");
+
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState == 4) {
+            if(xhr.status == 200) {
+                passarUsuariosCampos(JSON.parse(xhr.responseText));
+            }
+        }
+    }
+
+    xhr.send();
+}
+
+function passarUsuariosCampos(usuarios) {
+
+    var divJogadores = document.getElementById("containerJogadores");
+
+    for(var j=0; j<Object.keys(usuarios).length; j++) {
+        
+        var divJogador = document.createElement("div");
+        divJogador.classList.add("jogador");
+
+        var pJogador = document.createElement("p");
+        pJogador.innerHTML = usuarios["Usuario" + j.toString()].login;
+        divJogador.appendChild(pJogador);
+
+        if(usuarios["Usuario" + j.toString()].estado == "Online")
+        {
+            var btnJogador = document.createElement("button");
+            btnJogador.classList.add("btn_jogador");
+            btnJogador.innerHTML = '<i class="fas fa-plus"></i>';
+            divJogador.appendChild(btnJogador);
+        }
+        
+        
+
+
+        var pEstado = document.createElement("p");
+        pEstado.classList.add("estado");
+        pEstado.innerHTML = usuarios["Usuario" + j.toString()].estado;
+        divJogador.appendChild(pEstado);
+        
+        divJogadores.appendChild(divJogador);
+    }
 }

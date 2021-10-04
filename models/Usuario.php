@@ -1,6 +1,6 @@
 <?php
 
-class Usuario {
+class Usuario implements JsonSerializable {
 
     //constantes de banco
     const ERRO = 0;
@@ -62,6 +62,27 @@ class Usuario {
     }   
     public function getEstado() {
         return $this->estado;
+    }
+
+    public function jsonSerialize() {
+        $estadoString = "";
+        switch($this->estado) {
+            case Usuario::OFFLINE:
+                $estadoString = "Offline";
+                break;
+            case Usuario::ONLINE:
+                $estadoString = "Online";
+                break;
+            case Usuario::JOGANDO:
+                $estadoString = "Jogando";
+                break;
+        }
+        return [
+            "id" => $this->id,
+            "login" => $this->login,
+            "dataInscricao" => $this->dataInscricao,
+            "estado" => $estadoString
+        ];
     }
 
 }

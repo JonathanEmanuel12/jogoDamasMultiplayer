@@ -39,4 +39,15 @@ class Login {
             return "Login já existe, por favor use outro";
         }
     }
+
+    public function mudarEstado($usuario) {
+        $usuarioDao = new UsuarioDao();
+        
+        if($usuarioDao->alterarEstado($usuario->getId(), Usuario::ONLINE) == Usuario::SUCESSO)
+        {
+            return true;
+        }
+        return false;
+
+    }
 }

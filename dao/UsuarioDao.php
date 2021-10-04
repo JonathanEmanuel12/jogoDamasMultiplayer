@@ -69,18 +69,33 @@ class UsuarioDao {
         return Usuario::ERRO;
     }
 
-    public function buscarTodosUsuarios() {
+    public function buscarTodosUsuariosLogados($usuario) {
         $conexao = FabricaBanco::criarLigacao();
         $arrayUsuarios = array();
         try {
-            $resultado = $conexao->query("select * from usuarios;");
+            $resultado = $conexao->query("select * from usuarios where usu_estado = (" . Usuario::ONLINE . " or usu_estado = " . Usuario::JOGANDO .   ") and usu_id != " . $usuario . ";");
             foreach($resultado->fetchAll(PDO::FETCH_ASSOC) as $linha)
             {
                 $arrayUsuarios[] = new Usuario($linha["usu_id"], $linha["usu_login"], $linha["usu_senha"], $linha["usu_data_inscricao"], $linha["usu_estado"]);
             }
+            
             return $arrayUsuarios;
         }
-        catch(PDOException $e) {
+        catch(PDOException $e) {    
+            echo "Error" . $e->getMessage();
+        }
+        return Usuario::ERRO;
+    }
+
+    public function alterarEstado($usuario, $estado) {
+        $conexao = FabricaBanco::criarLigacao();
+        try {
+           $resultado = $conexao->query("update usuarios set usu_estado = {$estado} where usu_id = {$usuario}");
+           if($resultado->rowCount() == 1) {
+               return Usuario::SUCESSO;
+           }
+        }
+        catch(PDOException $e) {    
             echo "Error" . $e->getMessage();
         }
         return Usuario::ERRO;
